@@ -2,6 +2,7 @@ package edu.uw.multitouchlab;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 //Log.v(TAG, "finger down");
                 view.ball.cx = x;
                 view.ball.cy = y;
+                Log.v(TAG, event.getActionIndex() + "");
+                Log.v(TAG, event.getPointerId(event.getActionIndex()) + "");
+                view.addTouch(event.getPointerId(event.getActionIndex()), (int)x, (int)y);
                 return true;
             case (MotionEvent.ACTION_MOVE) : //move finger
                 //Log.v(TAG, "finger move");

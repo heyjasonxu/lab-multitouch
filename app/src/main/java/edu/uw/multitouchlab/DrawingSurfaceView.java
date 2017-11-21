@@ -33,7 +33,7 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
 
     public Ball ball; //public for easy access
 
-    public HashMap<Integer, Ball> pointer;
+    public HashMap<Integer, Ball> pointers;
 
 
     /**
@@ -73,6 +73,7 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
     public void init(){
         //make ball
         ball = new Ball(viewWidth/2, viewHeight/2, 100);
+        pointers = new HashMap<>();
     }
 
 
@@ -135,6 +136,11 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
         Log.d(TAG, "Drawing thread shut down");
     }
 
+    public synchronized void addTouch(int id, int x, int y) {
+        Ball ball = new Ball(x, y, 100);
+        pointers.put(id, ball);
+    }
+
     /**
      * An inner class representing a runnable that does the drawing. Animation timing could go in here.
      * http://obviam.net/index.php/the-android-game-loop/ has some nice details about using timers to specify animation
@@ -166,9 +172,5 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
                 }
             }
         }
-    }
-
-    public synchronized addTouch(int id, int x, int y) {
-        Ball ball = new Ball(x, y, 100);
     }
 }
