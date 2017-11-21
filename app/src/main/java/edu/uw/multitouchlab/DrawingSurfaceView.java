@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import java.util.*;
 
 /**
  * An example SurfaceView for generating graphics on
@@ -31,6 +32,8 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
     private Paint goldPaint; //drawing variables (pre-defined for speed)
 
     public Ball ball; //public for easy access
+
+    public HashMap<Integer, Ball> pointer;
 
 
     /**
@@ -163,5 +166,9 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
                 }
             }
         }
+    }
+
+    public synchronized addTouch(int id, int x, int y) {
+        Ball ball = new Ball(x, y, 100);
     }
 }
